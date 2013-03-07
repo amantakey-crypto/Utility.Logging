@@ -17,6 +17,7 @@ namespace Utility.Logging.NLog.Autofac.Test
       builder.RegisterType<LoggableDerived>().AsSelf();
       builder.RegisterType<Server>().AsImplementedInterfaces();
       builder.RegisterType<ImplementedClient>().AsImplementedInterfaces();
+      builder.RegisterType<ImplementedClientWithLoggerProperty>().AsSelf();
       builder.RegisterType<DomainOne>().AsImplementedInterfaces();
       builder.RegisterType<DomainTwo>().AsImplementedInterfaces();
       builder.RegisterType<DomainLoader>().AsSelf();
@@ -54,6 +55,14 @@ namespace Utility.Logging.NLog.Autofac.Test
       var result = container.Resolve<IClient>();
 
       Assert.That(result.Logger.Name, Is.EqualTo(typeof(ImplementedClient).FullName));
+    }
+
+    [Test]
+    public void LoggerInjectedIntoInstanceWithProperty()
+    {
+        var result = container.Resolve<ImplementedClientWithLoggerProperty>();
+
+        Assert.That(result.Logger.Name, Is.EqualTo(typeof(ImplementedClientWithLoggerProperty).FullName));
     }
 
     [Test]

@@ -66,6 +66,16 @@ namespace Utility.Logging.NLog.Autofac.Test
     public ILogger Logger { get; private set; }
   }
 
+  public class ImplementedClientWithLoggerProperty : IClient
+  {
+
+      public void Start()
+      {
+      }
+
+      public ILogger Logger { get; set; }
+  }
+
   public class ImplementedClient : Client
   {
     public ImplementedClient(ILogger logger) 
